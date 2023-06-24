@@ -16,8 +16,27 @@ THEN the password is either displayed in an alert or written to the page*/
 
 
 
+// 8. this was the last step, we selected the button with the id generate to call the generatePassword() function, then we added and event listener to a click to callback that function and then we display it in the "id=password" text area, using the value of the generated password  and setting it or copying it to the passwordTextArea.value
 
-// In this step we created an object called passChar, with a getter function, to get the value for random lower, upper, number and symbol. We get the value with the return function
+// 9. if the user does not chooses a character, then it will display in the text area to select a character type and it will display an alert also. I think it looks cool, but I know we should not repeat ourselves.
+
+
+const generateButton = document.getElementById('generate');
+const passwordTextarea = document.getElementById('password');
+
+generateButton.addEventListener('click', () => {
+  const password = generatePassword();
+  
+  if (password === null) {
+    alert("Please select at least one character type.");
+    passwordTextarea.value=("Error: Please select at least one character type.")
+  } else {
+    passwordTextarea.value = password;
+  }
+});
+
+
+// 0. In this step we created an object called passChar, with a getter function, to get the value for random lower, upper, number and symbol. We get the value with the return function
 
 const passChar = {
   get lower() {
@@ -57,7 +76,7 @@ function generatePassword() {
 
  There is a mini-bug, but we will address it later regarding the return of the password; for example if is ask for 10 it will give me 12 char, because of the while hehehehehe (sad computer noises)
 
- let password= " ";
+ let password= "";
  password += passChar.lower;
  password += passChar.upper;
  password += passChar.number;
@@ -89,6 +108,10 @@ function generatePassword() {
  const includeUpper = confirm("Include uppercase characters?")
  const includeNumber = confirm("Include number characters?")
  const includeSymbol = confirm("Include symbol characters?")
+
+ if (!includeLower && !includeUpper && !includeNumber && !includeSymbol) {
+  return null; //this is in case there is no char selected, because i tried it and the page exploded (sad computer noises again)
+}
 
  if (includeLower){
   password += passChar.lower
@@ -139,9 +162,10 @@ for (let i = passwordArray.length - 1; i > 0; i--) {
 
 return passwordArray.slice(0, passLength).join('');
 
+
 }
 
-console.log(generatePassword())
+//console.log(generatePassword()) this was just for checking, but I will leave it there
 
 
 //this is the end of the main code
@@ -165,6 +189,15 @@ function getLength() {
   return parsedLength;
 }
 
+/*7. this is the random lower case, upper, number and symbol functions. With this code we get a string value from the char sets https://www.w3schools.com/html/html_charset.asp
+
+we multiply times 26, 10 or 15 to the get the index of the charset and then we add 97, 65, 48 or 33 to move the index between the desired characters, this prevents us from using an array of the alphabet in lower case, then another in upper, then another of num...(***Falls asleep)
+
+
+*/
+
+
+
 
 
 
@@ -184,6 +217,8 @@ function randomNumber() {
 function randomSymbol() {
   return String.fromCharCode(Math.floor(Math.random()*15)+33);
 }
+
+//this logs are just for checking i did not messes up hahahaha console.log is friend
 
 console.log(randomLowerCase())
 console.log(randomUpperCase())

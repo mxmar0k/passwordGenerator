@@ -3,7 +3,7 @@ This is a password generator using java mainly.
 
     This will be located on my repository: https://github.com/mxmar0k/passwordGenerator
 
-    and live in:  
+    and live in:  https://mxmar0k.github.io/passwordGenerator/
 
 This application uses a given html and css. But the most importan things is that there is a button on the html and a div with a text area where:
 
